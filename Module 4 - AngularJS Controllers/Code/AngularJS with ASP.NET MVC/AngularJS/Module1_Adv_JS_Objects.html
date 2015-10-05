@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Module 1 - Advanced JS Objects</title>
+	<meta charset="utf-8" />
+    <script>
+        // ** Basic Objects **
+
+        // Object Literal Syntax
+        /*var personObjectLiteral1 = {};
+        personObjectLiteral1.firstName = "Fred";
+        personObjectLiteral1.lastName = "Flintstone";
+        personObjectLiteral1.display = function () { console.log(this.firstName + " " + this.lastName); };
+
+        var personObjectLiteral2 = { 
+            firstName: "Barney", 
+            lastName: "Rubble", 
+            display: function() { console.log(this.firstName + " " + this.lastName); }
+        };
+
+        // Object Constructor Function
+        var personObjectConstructor = new Object();
+        personObjectConstructor.firstName = "Wilma";
+        personObjectConstructor.lastName = "Flintstone";
+        personObjectConstructor.display = function () { console.log(this.firstName + " " + this.lastName); };
+
+        // Constructor Function
+        function PersonConstructorFunction(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.display = function () { console.log(this.firstName + " " + this.lastName); };
+        }
+        var personConstructorFunction = new PersonConstructorFunction("Betty", "Rubble");
+
+        // Object.Create
+        var personObjectCreate1 = Object.create(personObjectLiteral1);
+        var personObjectCreate2 = Object.create(personObjectLiteral2);
+
+        personObjectLiteral1.display();
+        personObjectLiteral2.display();
+        personObjectConstructor.display();
+        personConstructorFunction.display();
+        personObjectCreate1.display();
+        personObjectCreate2.display();*/
+
+        // Set breakpoint here and use Dev Tools to view 
+        //  personObjectLiteral1, personObjectLiteral2, personObjectConstructor, personConstructorFunction
+
+
+        // ** Functions are First Class Objects **
+        /*var showAlert = function (data) {
+            alert(data);
+        };
+        var showConsole = function (data) {
+            console.log(data);
+        };
+        function showData(output, msg) {
+            output(msg);
+        }
+        showData(showAlert, "Red Alert!");
+        showData(showConsole, "Hello Console!");*/
+
+
+        // ** Function Declaration vs Function Expression **
+        /*functionDeclaration();
+        function functionDeclaration() { console.log("functionDeclaration()"); }
+        functionDeclaration();
+
+        functionExpression();
+        var functionExpression = function () { console.log("functionExpression()"); }
+        functionExpression();*/
+
+        // Note error message "functionExpression is not a function"
+        //  It doesn't say "functionExpression does not exist", because it hoisted functionExpression above the call
+        //      var functionExpression;
+        //      functionExpression();
+        //      functionExpression = function () { console.log("functionExpression()"); }
+
+
+        // ** Closures **
+        /*function add() {
+            var counter = 0;
+            counter += 1;
+            console.log(counter);
+        }
+        // 1 1 1
+        add(); add(); add(); 		
+
+        function addClosure() {
+            var counter = 0;
+            return function () {
+                counter += 1;
+                console.log(counter);
+            }
+        };
+        var add2 = addClosure();
+        // 1 2 3
+        add2(); add2(); add2();*/
+
+        
+        // ** Immediately Invoked Function Expression IIFE **
+        /*var iife1 = function () { return "Hello"; };
+        var iife2 = (function () { return "Hello"; }());
+        console.log(iife1());
+        //console.log(iife2());		// test2 is not a function!
+        console.log(iife2);
+        console.log(typeof iife1);	// function
+        console.log(typeof iife2);	// string
+
+        // Example of IIFE with Closures from previous example
+        var add3 = (function () {
+            var counter = 0;
+            return function () { counter += 1; console.log(counter); }
+        })();
+        // 1 2 3 
+        add3(); add3(); add3();*/	
+
+
+        // ** Inheritance **
+
+        // Prototypal
+        /*function Person(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.display = function () { console.log(this.firstName + " " + this.lastName); };
+        }
+
+        function Student1(firstName, lastName, grade) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.grade = grade;
+            this.display = function () { console.log(this.firstName + " " + this.lastName + " has a " + this.grade); };
+        }
+        Student1.prototype = new Person();
+
+        function Student2(firstName, lastName, grade) {
+            Person.call(this, firstName, lastName);
+            this.grade = grade;
+            this.display = function () { Student2.prototype.display.call(this); console.log("Has a " + this.grade); };
+        }
+        Student2.prototype = new Person();
+
+        var pebbles = new Student1("Pebbles", "Flintstone", 95);
+        var bambam = new Student2("Bam-Bam", "Rubble", 92);
+        pebbles.display();
+        bambam.display();*/
+
+        // Inheritance with Object.create()
+        /*var person = {
+            firstName: null,
+            lastName: null,
+            display: function () { console.log(this.firstName + " " + this.lastName); }
+        };
+
+        var pet = Object.create(person, { breed: { value: null } });
+        var dino = Object.create(pet);
+        dino.firstName = "Dino";
+        dino.lastName = "Flintstone";
+        dino.breed = "Dino-Dog";
+        dino.display();
+
+        // Or Wrap it in a Constructor Function
+        function Pet(firstName, lastName, breed) {
+            var pet = Object.create(person, { breed: { value: null } });
+            var newPet = Object.create(pet);
+            newPet.firstName = firstName;
+            newPet.lastName = lastName;
+            newPet.breed = breed;
+            return newPet;
+        }
+        var fang = Pet("Fang", "Flintstone", "Snaggle-Cat");
+        fang.display(); */
+
+
+        // Improving Performance
+        //      Better since less code in constructor function
+        /*function Person2(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        Person2.prototype.display = function () {
+            console.log(this.firstName + " " + this.lastName);
+        }*/
+    </script>
+</head>
+<body>
+    <h1>Module 1 - Advanced JS Objects</h1>
+</body>
+</html>
+

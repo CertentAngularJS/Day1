@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Module 3 - AngularJS Modules</title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+    <h1>Module 3 - AngularJS Modules</h1>
+
+    <div ng-app="simpleApp">{{message}}</div>
+    <div ng-app="syntaxApp" id="syntaxAppDiv">{{message}}</div>
+
+    <script>
+        angular.module("syntaxApp", []);                            // Create a Module
+        var syntaxApp = angular.module("syntaxApp");                // Find a Module
+        syntaxApp.controller("SyntaxController", function() {});    // Add a Controller
+        syntaxApp.service("SimpleService", function () { });        // Add a Service
+
+        angular.module("fluentApp", [])                             // Create a Module
+            .controller("SyntaxController", function () { })        // Add a Controller
+            .service("SimpleService", function () { });             // Add a Service
+
+        var simpleApp = angular.module("simpleApp", ["fluentApp"]); // Create and find a Module
+        simpleApp.constant("baseURL", "http://localhost");          // Add a Constant (primitive) not-updatable
+        simpleApp.constant("globalSettings", {                      // Add a Constant (object) updatable
+            baseURL: "http://localhost/",
+            timeout: 2000
+        });
+        simpleApp.config(simpleAppConfig);                          // Add a Config
+        simpleApp.run(simpleAppRun);
+
+        function simpleAppConfig(baseURL, globalSettings) {         // Config Function
+            baseURL = "http://simpleapp.com";
+            globalSettings.baseURL = "http://simpleapp.com";
+        }
+
+        function simpleAppRun(baseURL, globalSettings) {            // Run Function
+            console.log(baseURL);
+            console.log(globalSettings);
+        }
+
+        angular.bootstrap(document.getElementById("syntaxAppDiv"), ["syntaxApp"]);
+    </script>
+</body>
+</html>
+
